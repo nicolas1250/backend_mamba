@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🐍 SEMILLERO MAMBA - Backend
 
 Sistema de Gestión de Proyectos y Productos de Investigación desarrollado para **CORHUILA** bajo lineamientos de **Minciencias**.
@@ -1011,3 +1012,6 @@ Proyecto desarrollado para el **Semillero Mamba**
 **Ingeniería de Sistemas — CORHUILA**
 
 ---
+=======
+# backend_mamba
+>>>>>>> 161eef604191ccf0771c0ed26d78440563f0af2e
