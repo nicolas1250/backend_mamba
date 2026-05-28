@@ -12,6 +12,16 @@ from app.models.models import Proyecto
 router = APIRouter(prefix="/proyectos", tags=["Proyectos"])
 
 
+
+@router.get("/publico", response_model=list[ProyectoOut])
+async def listar(
+    skip: int = 0,
+    limit: int = 100,
+    db: AsyncSession = Depends(get_db)
+):
+    return await ProyectoService.get_multi(db, skip=skip, limit=limit)
+
+
 @router.get("/", response_model=list[ProyectoOut])
 async def listar(skip: int = 0, limit: int = 100, db: AsyncSession = Depends(get_db), current_user=Depends(require_permission("proyectos", "leer"))):
     return await ProyectoService.get_multi(db, skip=skip, limit=limit)
