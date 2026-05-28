@@ -168,8 +168,10 @@ async def seed_database(db: AsyncSession):
     # PROYECTO
     # ======================
     proyecto = Proyecto(
-        nombre="Sistema Mamba",
+        nombre="Sistema sexonacional de gestión investigativa",
         descripcion="Plataforma para gestión investigativa",
+        imagen_url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu3-_TbUInL975rAfMjR83kQAjePhVRRJFfw&s",
+        link_proyecto="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu3-_TbUInL975rAfMjR83kQAjePhVRRJFfw&s",
         estado="activo",
         fecha_inicio=datetime.utcnow(),
         fecha_fin=None,
@@ -178,6 +180,8 @@ async def seed_database(db: AsyncSession):
 
     db.add(proyecto)
     await db.flush()
+
+    
 
     # ======================
     # PROYECTO USUARIOS

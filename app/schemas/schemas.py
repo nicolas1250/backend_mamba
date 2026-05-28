@@ -80,11 +80,12 @@ class UsuarioBase(BaseModel):
     activo: bool = True
 
 
+
 class UsuarioCreate(BaseModel):
     nombre: str
     email: EmailStr
     password: str = Field(..., min_length=8)
-    # ❌ eliminamos rol_id del request (mejor práctica)
+    rol_id: int  
 
 
 class UsuarioUpdate(BaseModel):
@@ -188,6 +189,8 @@ class ProyectoCreate(ProyectoBase):
 class ProyectoUpdate(BaseModel):
     nombre: Optional[str] = None
     descripcion: Optional[str] = None
+    imagen_url: Optional[str] = None
+    link_proyecto: Optional[str] = None
     activo: Optional[bool] = None
 
 

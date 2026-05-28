@@ -6,6 +6,8 @@ from app.core.security import get_current_active_user
 from app.db.session import get_db
 from app.schemas.schemas import ProyectoCreate, ProyectoUpdate, ProyectoOut
 from app.services.services import ProyectoService
+from app.models.models import Proyecto
+
 
 router = APIRouter(prefix="/proyectos", tags=["Proyectos"])
 
@@ -25,9 +27,8 @@ async def obtener(id: int, db: AsyncSession = Depends(get_db), current_user=Depe
 
 @router.post("/", response_model=ProyectoOut, status_code=201)
 async def crear(payload: ProyectoCreate, db: AsyncSession = Depends(get_db), current_user=Depends(require_permission("proyectos", "crear"))):
-    data = payload.model_dump()
+    data = payload.model_dump(exclude_unset=True)
     data["creado_por"] = current_user.id
-    from app.models.models import Proyecto
     obj = Proyecto(**data)
     db.add(obj)
     await db.flush()

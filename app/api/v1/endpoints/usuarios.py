@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.permissions import require_permission
-from app.core.permissions import require_permission
 from app.core.security import get_current_active_user
 from app.db.session import get_db
 from app.schemas.schemas import UsuarioCreate, UsuarioUpdate, UsuarioOut
@@ -22,6 +21,10 @@ async def obtener(id: int, db: AsyncSession = Depends(get_db), current_user=Depe
     if not obj:
         raise HTTPException(404, "Usuario no encontrado")
     return obj
+
+@router.post("/", response_model=UsuarioOut, status_code=201)
+async def crear(payload: UsuarioCreate, db: AsyncSession = Depends(get_db), current_user=Depends(require_permission("usuarios", "crear"))):
+    return await UsuarioService.create(db, obj_in=payload, rol_id=payload.rol_id)
 
 
 @router.patch("/{id}", response_model=UsuarioOut)
