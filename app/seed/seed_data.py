@@ -35,8 +35,9 @@ async def seed_database(db: AsyncSession):
     admin = Rol(nombre="Administrador")
     profesor = Rol(nombre="Profesor")
     estudiante = Rol(nombre="Estudiante")
+    usuario = Rol(nombre="Usuario")
 
-    db.add_all([admin, profesor, estudiante])
+    db.add_all([admin, profesor, estudiante, usuario])
     await db.flush()
 
     # ======================
@@ -116,6 +117,22 @@ async def seed_database(db: AsyncSession):
     for nombre in permisos_estudiante:
         db.add(RolPermiso(
             rol_id=estudiante.id,
+            permiso_id=perm_map[nombre].id
+        ))
+    # ======================
+    # Usuario
+    # ======================
+    permisos_usuario = [
+        "Leer Proyecto",
+        "actualizar Proyecto",
+        "Eliminar Proyecto",
+
+        "Leer Producto",
+    ]
+    
+    for nombre in permisos_usuario:
+        db.add(RolPermiso(
+            rol_id=usuario.id,
             permiso_id=perm_map[nombre].id
         ))
 

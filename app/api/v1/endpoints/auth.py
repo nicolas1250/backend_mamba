@@ -37,7 +37,7 @@ async def registro(payload: UsuarioCreate, db: AsyncSession = Depends(get_db)):
         raise HTTPException(status_code=400, detail="El email ya está registrado")
 
     # 🔥 buscar rol por defecto
-    rol = await RolService.get_by_nombre(db, "usuario")  # o "admin"
+    rol = await RolService.get_by_nombre(db, "Usuario")  # o "admin"
     if not rol:
         raise HTTPException(status_code=500, detail="Rol por defecto no existe")
 
